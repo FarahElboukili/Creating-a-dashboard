@@ -7,9 +7,11 @@ import {
   LayoutDashboard,
   MessageSquare,
   Package,
-  ShoppingsBag,
+  ShoppingBag,
   Users,
   Zap, 
+  Settings,
+  ChevronDown,
 } from 'lucide-react';
 import React from 'react';
 
@@ -44,7 +46,7 @@ const menuItems=[
 },
 {
   id:"ecommerce",
-  icon:ShoppingsBag,
+  icon:ShoppingBag,
   label:"E-commerce",
   submenu:[
    { id:"products", label:"Products"},
@@ -74,7 +76,7 @@ const menuItems=[
   {
     id:"reports",
     icon:FileText,
-    label:Reports ,
+    label:"Reports",
   },
   {
     id:"Settings",
@@ -109,11 +111,38 @@ function Sidebar() {
       {/*Navigation i will diplay dynamic menus */}
       <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
         { menuItems.map((item)=>{
-          <div key={item.id}>
-            
-          </div>
-        }
-      )}
+          return(
+            <div key={item.id}>
+              <button className={"w-full flex items-center justify-between p-3 rounded-xl transition-all duration-200"}>
+                <div className="flex items-center space-x-3">
+                  <item.icon className={"w-5 h-5"}/>
+                   {/*Conditional rendering */}
+                   <>
+                   <span cLassName="font-medium ml-2">{item.label}</span>
+                   {item.badge &&(
+                   <span className="px-2 py-1 text-xs bg-red-500 text-white- rounded-full">{item.badge}</span>)}
+                   {item.count&&(
+                    <span className="px-2 py-1 text-xs bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full">{item.count}</span>
+                   )}
+
+                   </>
+                </div>
+                {item.submenu&&(
+                  <ChevronDown className="w-4 h-4 transition-transform"/>
+                )}
+              </button>
+              {/*sub Menus*/}
+               {/*<div className="ml-8 mt-2 space-y-1" >
+                {item.submenu.map((subitemc)=>{
+                  return <button></button>
+                })} 
+
+              </div>*/}
+              
+          
+            </div>
+          );
+        })}
       </nav>
       {/*User Profile*/}
       <div className="p-4 border-t border-slate-200/50 dark:border-slate-700/50">
